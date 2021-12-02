@@ -95,11 +95,7 @@ func (c *Config) deleteHandler(w http.ResponseWriter, req *http.Request) {
 		_, _ = w.Write(resp)
 		return
 	}
-
-	for key, val := range  req.Form{
-		print(key,val)
-	}
-
+	fmt.Println(req.Form,"]]]]]]")
 	id := req.Form.Get("_id")
 	fmt.Println(id,"----><-----")
 	isRemoved, err := dbConfig.Delete(id)
