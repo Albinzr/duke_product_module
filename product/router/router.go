@@ -95,9 +95,8 @@ func (c *Config) deleteHandler(w http.ResponseWriter, req *http.Request) {
 		_, _ = w.Write(resp)
 		return
 	}
-	fmt.Println(req.Form,"]]]]]]")
+
 	id := req.Form.Get("_id")
-	fmt.Println(id,"----><-----")
 	isRemoved, err := dbConfig.Delete(id)
 
 	if err != nil {
