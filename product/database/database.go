@@ -1,10 +1,11 @@
 package database
 
 import (
-	util "duke/init/src/helpers"
-	"duke/init/src/product/Config"
+
 	"errors"
 	"fmt"
+	"git/product/config"
+	util "git/product/helper"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
