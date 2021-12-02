@@ -16,19 +16,6 @@ type Config ProductConfig.Config
 
 func (c *Config) Init() {
 	c.Collection = c.Database.Collection(c.CollectionName)
-	//indexName, err := c.Collection.Indexes().CreateOne(
-	//	context.Background(),
-	//	mongo.IndexModel{
-	//		Keys:    bson.D{{Key: "productId", Value: 1}},
-	//		Options: options.Index().SetUnique(true),
-	//	},
-	//)
-	//if err != nil {
-	//	util.LogError("unable to create indexes for db", err)
-	//	return
-	//}
-	//
-	//util.LogInfo("product module indexes created", indexName)
 }
 
 func (c *Config) Create(data url.Values) (primitive.ObjectID, error) {

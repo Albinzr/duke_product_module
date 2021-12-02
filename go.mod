@@ -1,4 +1,4 @@
-module git
+module github.com/Albinzr/duke_product_module
 
 go 1.17
 
