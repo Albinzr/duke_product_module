@@ -4,8 +4,8 @@ import (
 
 	"errors"
 	"fmt"
-	"git/product/config"
-	util "git/product/helper"
+	"github.com/Albinzr/duke_product_module/product/config"
+	util "github.com/Albinzr/duke_product_module/product/helper"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
