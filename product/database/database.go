@@ -17,8 +17,6 @@ type Config ProductConfig.Config
 
 func (c *Config) Init() {
 	c.Collection = c.Database.Collection(c.CollectionName)
-
-	var a interface{} = bson.A{"$exists", bson.D{{"quantity", 	bson.TypeInt32}}}
 	indexName, err := c.Collection.Indexes().CreateOne(
 		context.Background(),
 		mongo.IndexModel{
