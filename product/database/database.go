@@ -22,11 +22,12 @@ func (c *Config) Init() {
 	indexName, err := c.Collection.Indexes().CreateOne(
 		context.Background(),
 		mongo.IndexModel{
-			Keys:    bson.D{{Key: "username", Value: 1}},
-			Options: options.Index().SetPartialFilterExpression(a),
+			Keys:    bson.D{{Key: "quantity", Value: 1}},
+			Options: options.Index().SetUnique(false),
 		},
 	)
 	if err != nil {
+
 		util.LogError("unable to create indexes for db", err)
 		return
 	}
