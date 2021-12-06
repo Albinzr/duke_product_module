@@ -1,13 +1,14 @@
 package database
 
 import (
-
+	"context"
 	"errors"
 	"fmt"
 	"github.com/Albinzr/duke_product_module/product/config"
 	util "github.com/Albinzr/duke_product_module/product/helper"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"net/url"
 )
@@ -16,6 +17,21 @@ type Config ProductConfig.Config
 
 func (c *Config) Init() {
 	c.Collection = c.Database.Collection(c.CollectionName)
+
+	var a interface{} = bson.A{"$exists", bson.D{{"foo", "bar"}}}
+	indexName, err := c.Collection.Indexes().CreateOne(
+		context.Background(),
+		mongo.IndexModel{
+			Keys:    bson.D{{Key: "username", Value: 1}},
+			Options: options.Index().SetPartialFilterExpression(a),
+		},
+	)
+	if err != nil {
+		util.LogError("unable to create indexes for db", err)
+		return
+	}
+	util.LogInfo("product module indexes created", indexName)
+
 }
 
 func (c *Config) Create(data url.Values) (primitive.ObjectID, error) {
