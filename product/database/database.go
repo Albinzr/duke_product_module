@@ -59,6 +59,14 @@ func (c *Config) Create(data url.Values) (primitive.ObjectID, error) {
 }
 func (c *Config) Update(data url.Values) (bool, error) {
 
+	qty := data.Get("quantity")
+	_,err := strconv.Atoi(qty)
+
+	if err != nil{
+		util.LogError("quantity is missing", err)
+		return false, err
+	}
+
 	var value = make(map[string]interface{})
 	var filter bson.M
 	for key, _ := range data {
@@ -128,7 +136,10 @@ func (c *Config) FindAllProduct(startIndex *int64, limit *int64) (interface{}, e
 	for cur.Next(c.Ctx) {
 		var result bson.M
 		err := cur.Decode(&result)
-		if err != nil {  }
+		if err != nil {
+			util.LogError("unable decode data", err)
+			return nil, err
+		}
 		product = append(product,result)
 	}
 
