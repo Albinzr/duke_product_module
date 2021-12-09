@@ -11,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"net/url"
+	"strconv"
 )
 
 type Config ProductConfig.Config
@@ -36,6 +37,15 @@ func (c *Config) Init() {
 func (c *Config) Create(data url.Values) (primitive.ObjectID, error) {
 
 	var value = make(map[string]interface{})
+
+	qty := data.Get("quantity")
+	_,err := strconv.Atoi(qty)
+
+	if err != nil{
+		util.LogError("quantity is missing", err)
+		return primitive.ObjectID{}, err
+	}
+
 	for key, _ := range data {
 		value[key] = data.Get(key)
 	}
